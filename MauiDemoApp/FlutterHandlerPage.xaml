@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:MauiDemoApp"
+             x:Class="MauiDemoApp.FlutterHandlerPage"
+             Title="FlutterPage">
+	<ContentPage.Content>
+		<OnPlatform x:TypeArguments="View">
+			<On Platform="iOS">
+				<local:FlutterHandlerView  />
+			</On>
+			<On Platform="Android">
+				<local:FlutterView  />
+			</On>
+		</OnPlatform>
+	</ContentPage.Content>
+</ContentPage>
