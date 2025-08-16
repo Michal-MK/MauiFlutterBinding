@@ -1,0 +1,33 @@
+# Visual Studio / Rider
+.vs
+.idea
+
+# Build artifacts
+Android.Binding/bin
+Android.Binding/obj
+Android.Binding/aars
+Android.Binding/jars
+iOS.Binding/bin
+iOS.Binding/obj
+iOS.Binding/*.xcframework
+MauiDemoApp/bin
+MauiDemoApp/obj
+
+# Android build artifacts
+Android.Native/.idea
+Android.Native/.gradle
+Android.Native/build
+Android.Native/*/build
+Android.Native/binding/xamarin
+
+# iOS build artifacts
+iOS.Native/build
+iOS.Native/*.xcframework
+
+# Flutter build artifacts
+flutter_app/.gradle
+flutter_app/build
+flutter_app/.dart_tool
+
+# System files
+.DS_Store
