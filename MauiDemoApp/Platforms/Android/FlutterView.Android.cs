@@ -13,7 +13,7 @@ public class FlutterViewHandler(IPropertyMapper mapper, CommandMapper? commandMa
 	public FlutterViewHandler() : this(PropertyMapper, null) { }
 
 	protected override Android.Views.View CreatePlatformView() {
-		return new Binding().GetFlutterView(MainActivity.Instance);
+		return new Binding().GetFlutterView(MainActivity.Instance!);
 	}
 
 	protected override void DisconnectHandler(Android.Views.View platformView) {

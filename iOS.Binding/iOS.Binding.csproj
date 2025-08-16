@@ -11,6 +11,12 @@
     <ObjcBindingCoreSource Include="StructsAndEnums.cs" />
   </ItemGroup>
 
+  <!-- Include generated binding files for IntelliSense -->
+  <ItemGroup>
+    <Compile Include="obj\Debug\net9.0-ios\iOS\iOS.Binding\*.g.cs" Condition="Exists('obj\Debug\net9.0-ios\iOS\iOS.Binding\')" />
+    <Compile Include="obj\Debug\net9.0-ios\iOS\*.g.cs" Condition="Exists('obj\Debug\net9.0-ios\iOS\')" />
+  </ItemGroup>
+
   <ItemGroup>
     <NativeReference Include="Binding.xcframework">
       <Kind>Framework</Kind>

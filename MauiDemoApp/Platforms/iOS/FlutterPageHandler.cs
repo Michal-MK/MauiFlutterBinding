@@ -1,6 +1,4 @@
 ﻿using CoreGraphics;
-using Microsoft.Maui.Controls.Compatibility.Platform.iOS;
-using Microsoft.Maui.Controls.PlatformConfiguration;
 using Microsoft.Maui.Handlers;
 using UIKit;
 
@@ -16,7 +14,7 @@ public class FlutterViewHandler(IPropertyMapper mapper, CommandMapper? commandMa
 	public static IPropertyMapper<FlutterView, FlutterViewHandler> PropertyMapper = new PropertyMapper<FlutterView, FlutterViewHandler>(ViewMapper);
 
 	protected override UIView CreatePlatformView() {
-		return (new iOS.Binding.Binding()).FlutterViewController.View;
+		return new iOS.Binding.Binding().FlutterViewController.View!;
 	}
 
 	public override Size GetDesiredSize(double widthConstraint, double heightConstraint) {
