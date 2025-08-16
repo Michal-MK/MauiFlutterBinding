@@ -21,7 +21,7 @@ public partial class MainPage : ContentPage
         var parameters = new[] { "Hello", "world!" };
         
 #if ANDROID
-        new Binding().Async(MainActivity.instance, parameters.ToList(), new StringResultImpl() { callback = OnAsyncResult });
+        new Binding().Async(MainActivity.Instance, parameters.ToList(), new StringResultImpl() { Callback = OnAsyncResult });
 #elif IOS || MACCATALYST
         new iOS.Binding.Binding().AsyncWithParameters(parameters, OnAsyncResult);
 #endif
@@ -35,5 +35,3 @@ public partial class MainPage : ContentPage
         });        
     }
 }
-
-

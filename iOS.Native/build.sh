@@ -49,10 +49,6 @@ sharpie bind \
 echo "Post-processing ApiDefinitions.cs..."
 # Delete using Binding;
 sed -i '' '/using Binding;/d' "ApiDefinitions.cs"
-# Add using UIKit;
-sed -i '' '/using Foundation;/a\
-using UIKit;\
-' "ApiDefinitions.cs"
 # Delete [Verify] attribute
 sed -i '' '/\[Verify.*\]/d' "ApiDefinitions.cs"
 

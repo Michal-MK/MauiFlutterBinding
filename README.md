@@ -55,6 +55,14 @@ This project demonstrates how to:
 ```bash
 # Build all components (Flutter + Android + iOS + MAUI)
 ./build_all.sh
+
+# Platform-specific builds
+./build_all.sh --ios        # iOS only
+./build_all.sh --an         # Android only
+
+# Skip phases (useful for development)
+./build_all.sh -f           # Skip Flutter build
+./build_all.sh -n           # Skip native builds
 ```
 
 ### 2. Run MAUI Demo
@@ -134,6 +142,15 @@ implementation 'com.example.flutter_app:flutter_debug:1.0'
 // For release mode (optimized for production):
 implementation 'com.example.flutter_app:flutter_release:1.0'
 ```
+
+#### ⚠️ iOS Debug Mode Limitation
+**iOS debug mode is not supported** when embedding Flutter in MAUI apps. iOS must use release mode:
+
+**For iOS:** Keep `FLUTTER_FRAMEWORKS_PATH="../flutter_app/build/ios/framework/Release"` in `iOS.Native/build.sh`
+
+**For Android:** Can use either debug or release by changing the dependency in `Android.Native/binding/build.gradle`
+
+Debug mode on iOS requires Flutter tooling or Xcode direct execution, which I have no idea how to achieve with MAUI embedding.
 
 ## 🛠️ Development Workflow
 

@@ -3,36 +3,30 @@ using Microsoft.Maui.Controls.Platform;
 using Microsoft.Maui.Controls.PlatformConfiguration;
 using UIKit;
 
-namespace MauiDemoApp
-{
-    public class FlutterPageRenderer : UIViewController, IVisualElementRenderer
-    {
-        public FlutterPageRenderer()
-        {
-            ViewController = (new iOS.Binding.Binding()).FlutterViewController;
-        }
+namespace MauiDemoApp;
 
-        public VisualElement? Element { get; private set; }
+public class FlutterPageRenderer : UIViewController, IVisualElementRenderer {
+	public UIViewController ViewController { get; }
 
-        public event EventHandler<VisualElementChangedEventArgs> ElementChanged;
+	public FlutterPageRenderer() {
+		ViewController = (new iOS.Binding.Binding()).FlutterViewController;
+	}
 
-        public UIView? NativeView => ViewController.View;
+	public VisualElement? Element { get; private set; }
 
-        public SizeRequest GetDesiredSize(double widthConstraint, double heightConstraint)
-        {
-            return NativeView.GetSizeRequest(widthConstraint, heightConstraint);
-        }
+	public event EventHandler<VisualElementChangedEventArgs> ElementChanged;
 
-        public void SetElement(VisualElement element)
-        {
-            Element = element;
-        }
+	public UIView? NativeView => ViewController.View;
 
-        public void SetElementSize(Size size)
-        {
-            Element?.Layout(new Rect(Element.X, Element.Y, size.Width, size.Height));
-        }
+	public SizeRequest GetDesiredSize(double widthConstraint, double heightConstraint) {
+		return NativeView.GetSizeRequest(widthConstraint, heightConstraint);
+	}
 
-        public UIViewController ViewController { get; }
-    }
+	public void SetElement(VisualElement element) {
+		Element = element;
+	}
+
+	public void SetElementSize(Size size) {
+		Element?.Layout(new Rect(Element.X, Element.Y, size.Width, size.Height));
+	}
 }

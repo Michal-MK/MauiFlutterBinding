@@ -8,5 +8,10 @@
   -->
 
   <!-- <remove-node path="/api/package[@name='com.airbnb.lottie']" /> -->
-<remove-node path="/api/package[@name='io.flutter.embedding.android']" />
+
+  <!--
+  This seems to be an optimization measure, removing it has no effect on the build and runtime as far as I can see...
+  I did not measure app size impact.
+  -->
+  <remove-node path="/api/package[@name='io.flutter.embedding.android']" />
 </metadata>

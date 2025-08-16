@@ -1,6 +1,5 @@
 using Foundation;
 using UIKit;
-using UIKit;
 
 namespace iOS.Binding
 {
