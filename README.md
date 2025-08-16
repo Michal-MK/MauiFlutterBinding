@@ -2,6 +2,14 @@
 
 A complete example of integrating Flutter applications within .NET MAUI applications for both Android and iOS platforms.
 
+## 🙏 Credits
+
+This project is based on the excellent work from:
+- **Original concept**: [valentinkatic/MauiFlutterBinding](https://github.com/valentinkatic/MauiFlutterBinding)
+- **Enhanced version**: [cl3m/MauiFlutterBinding](https://github.com/cl3m/MauiFlutterBinding)
+
+This fork includes updated dependencies, improved build processes, and enhanced documentation.
+
 ## 🏗️ Architecture
 
 This project demonstrates how to:
@@ -25,44 +33,31 @@ This project demonstrates how to:
 ### Development Environment
 - **macOS** (required for iOS development)
 - **Xcode 15+** with iOS SDK 17.2+
-- **Android Studio** with Android SDK 34
+- **Android Studio** with Android SDK 35+
 - **Android NDK 27.0+**
 - **.NET 9.0 SDK**
-- **Visual Studio Code** or **Visual Studio for Mac**
+- **Visual Studio Code**
 
 ### Flutter Environment
-- **Flutter 3.32.8+**
-- **Dart 3.8.1+**
+- **Flutter 3.32.8** (Other/newer versions may work, but the kotlin version must be compatible)
 - **Kotlin 2.1.0+** (for Android)
 
 ### iOS Specific
-- **Objective Sharpie** for iOS binding generation
-  ```bash
-  # Install via Visual Studio for Mac or download from Microsoft
-  ```
+- **Objective Sharpie** for iOS binding generation [link](https://aka.ms/objective-sharpie)
 
 ### Android Specific  
-- **Android NDK 27.0+**
-  ```bash
-  # Install via Android Studio SDK Manager
-  # Or set ANDROID_NDK_ROOT environment variable
-  ```
+- **Android NDK 27.0+** - usually is installed by default in the android setup, older versions (26.x) will not work, so ensure you have the correct version.
 
 ## 🚀 Quick Start
 
-### 1. Clone and Setup
-```bash
-git clone <your-repo-url>
-cd MauiFlutterBinding
-```
 
-### 2. Build Everything
+### 1. Build Everything
 ```bash
 # Build all components (Flutter + Android + iOS + MAUI)
 ./build_all.sh
 ```
 
-### 3. Run MAUI Demo
+### 2. Run MAUI Demo
 ```bash
 # Open in IDE
 dotnet build MauiDemoApp/MauiDemoApp.csproj
@@ -73,9 +68,7 @@ dotnet build MauiDemoApp/MauiDemoApp.csproj
 ### 1. Flutter App
 ```bash
 cd flutter_app
-flutter pub get
-flutter build aar --release          # For Android
-flutter build ios-framework --release # For iOS
+./build.sh
 ```
 
 ### 2. Android Native Binding
@@ -101,6 +94,7 @@ This will:
 - Copy frameworks to iOS.Binding
 
 ### 4. MAUI Application
+- all the iOS steps with provisioning need to be addressed as usual, tested on AN only
 ```bash
 dotnet build MauiFlutterBinding.sln --configuration Release
 ```
@@ -109,7 +103,7 @@ dotnet build MauiFlutterBinding.sln --configuration Release
 
 ### Android Configuration
 - **Minimum SDK**: API 26 (Android 8.0)
-- **Target SDK**: API 34 (Android 14)
+- **Target SDK**: API 35 (Android 15)
 - **Kotlin Version**: 2.1.0
 - **NDK Version**: 27.0+
 
@@ -120,8 +114,26 @@ dotnet build MauiFlutterBinding.sln --configuration Release
 
 ### Flutter Configuration
 - **Version**: 3.32.8
-- **Build Mode**: Release (for production)
+- **Build Mode**: Both debug and release built automatically
 - **Plugins**: device_info_plus 11.3.0
+
+#### Flutter Build Modes
+The `./build.sh` script automatically builds **both debug and release** versions of Flutter:
+
+```bash
+cd flutter_app
+./build.sh  # Builds both debug and release for Android AAR and iOS Framework
+```
+
+To switch between debug and release modes, simply update the dependency in `Android.Native/binding/build.gradle`:
+
+```groovy
+// For debug mode (enables flutter attach for hot reload):
+implementation 'com.example.flutter_app:flutter_debug:1.0'
+
+// For release mode (optimized for production):
+implementation 'com.example.flutter_app:flutter_release:1.0'
+```
 
 ## 🛠️ Development Workflow
 
@@ -141,7 +153,7 @@ cd iOS.Native
 ### Flutter Hot Reload (Development)
 ```bash
 cd flutter_app
-flutter attach # When MAUI app is running in debug mode
+flutter attach # When MAUI app is running with the flutter app built in debug mode
 ```
 
 ## 📝 Key Features Implemented
