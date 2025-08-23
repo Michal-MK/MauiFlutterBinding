@@ -1,17 +1,24 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
+
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:local="clr-namespace:MauiDemoApp"
-             x:Class="MauiDemoApp.FlutterHandlerPage"
-             Title="FlutterPage">
-	<ContentPage.Content>
-		<OnPlatform x:TypeArguments="View">
-			<On Platform="iOS">
-				<local:FlutterHandlerView  />
-			</On>
-			<On Platform="Android">
-				<local:FlutterView  />
-			</On>
-		</OnPlatform>
-	</ContentPage.Content>
+			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+			 xmlns:local="clr-namespace:MauiDemoApp"
+			 x:Class="MauiDemoApp.FlutterHandlerPage"
+			 HandlerProperties.DisconnectPolicy="Manual"
+			 Title="FlutterPage">
+	<Grid RowDefinitions="Auto, *">
+		<ScrollView Grid.Row="1">
+			<VerticalStackLayout>
+				<Border BackgroundColor="Aqua" HeightRequest="400" />
+				<Grid Padding="32"
+					  HeightRequest="400"
+					  BackgroundColor="Brown">
+					<local:FlutterView />
+				</Grid>
+				<Border BackgroundColor="Orange" HeightRequest="400" />
+				<Border BackgroundColor="Red" HeightRequest="400" />
+			</VerticalStackLayout>
+		</ScrollView>	
+		<Border BackgroundColor="White" HeightRequest="64" Grid.Row="0"/>
+	</Grid>
 </ContentPage>

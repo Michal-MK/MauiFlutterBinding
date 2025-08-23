@@ -34,4 +34,12 @@ public partial class MainPage : ContentPage
             asyncLabel.Text = result;
         });        
     }
+
+    private void OnRendererClicked(object? sender, EventArgs e) {
+        (App.Current.MainPage as NavigationPage)?.PushAsync(new FlutterPage(), animated: false);
+    }
+
+    private void OnHandlerClicked(object? sender, EventArgs e) {
+        (App.Current.MainPage as NavigationPage)?.PushAsync(new FlutterHandlerPage(), animated: true);
+    }
 }

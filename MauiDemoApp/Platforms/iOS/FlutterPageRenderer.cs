@@ -1,6 +1,5 @@
 ﻿using Microsoft.Maui.Controls.Compatibility.Platform.iOS;
 using Microsoft.Maui.Controls.Platform;
-using Microsoft.Maui.Controls.PlatformConfiguration;
 using UIKit;
 
 namespace MauiDemoApp;

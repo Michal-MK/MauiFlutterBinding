@@ -19,7 +19,7 @@ public static class MauiProgram
             {
 #if IOS
                 handlers.AddCompatibilityRenderer(typeof(FlutterPage), typeof(FlutterPageRenderer));
-                handlers.AddHandler(typeof(FlutterHandlerView), typeof(FlutterViewHandler));
+                handlers.AddHandler(typeof(FlutterView), typeof(FlutterViewHandler));
 #elif ANDROID
                 handlers.AddHandler(typeof(FlutterView), typeof(FlutterViewHandler));
 #endif

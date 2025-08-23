@@ -16,6 +16,7 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ReportFragment.Companion.reportFragment
 import io.flutter.embedding.android.FlutterActivity
 import io.flutter.embedding.android.FlutterFragment
+import io.flutter.embedding.android.RenderMode
 import io.flutter.plugins.GeneratedPluginRegistrant
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
@@ -40,7 +41,9 @@ class Binding {
         val view = FragmentContainerView(activity)
             .apply { id = View.generateViewId() }
 
-        val flutterFragment = FlutterFragment.createDefault()
+        val flutterFragment = FlutterFragment.withNewEngine()
+            .renderMode(RenderMode.surface)
+            .build<FlutterFragment>()
 
         (activity as AppCompatActivity).supportFragmentManager.beginTransaction()
             .add(view.id, flutterFragment)

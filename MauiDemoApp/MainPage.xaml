@@ -23,8 +23,17 @@
                 IsVisible="False"
                 HorizontalOptions="Center" />
             
+            <Button
+                Text="Renderer"
+                Clicked="OnRendererClicked"
+                HorizontalOptions="Center" />
+            
+            <Button
+                Text="Handler"
+                Clicked="OnHandlerClicked"
+                HorizontalOptions="Center" />
+            
         </VerticalStackLayout>
     </ScrollView>
 
 </ContentPage>
-

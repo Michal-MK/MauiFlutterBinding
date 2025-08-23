@@ -21,6 +21,6 @@
 		<ShellContent
 			Title="Flutter App (Handler)"
 			ContentTemplate="{DataTemplate local:FlutterHandlerPage}"
-			Route="FlutterPage" />
+			Route="FlutterPage2" />
 	</TabBar>
 </Shell>
