@@ -20,7 +20,7 @@ case $1 in
 esac
 
 echo "Check flutter"
-flutter doctor
+# flutter doctor
 
 if [ "$PLATFORM" = "ios" ] || [ "$PLATFORM" = "all" ]; then
     echo "Build ios frameworks"

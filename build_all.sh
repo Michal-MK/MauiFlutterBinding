@@ -6,6 +6,7 @@ show_usage() {
     echo "Options:"
     echo "  -f, --no-flutter-build    Skip Flutter build step"
     echo "  -n, --no-native-build     Skip native build step (Android.Native and iOS.Native)"
+    echo "  --do-binding-build        Include Binding build step (Android.Binding and iOS.Binding)"
     echo "  --ios                     Build only iOS components"
     echo "  --an                      Build only Android components"
     echo "  --help                    Show this help message"
@@ -31,6 +32,7 @@ set -e
 # Default values
 SKIP_FLUTTER_BUILD=false
 SKIP_NATIVE_BUILD=false
+BUILD_BINDING=false
 BUILD_PLATFORM=""
 
 # Parse arguments
@@ -38,6 +40,7 @@ while [[ "$#" -gt 0 ]]; do
     case $1 in
         -f|--no-flutter-build) SKIP_FLUTTER_BUILD=true ;;
         -n|--no-native-build) SKIP_NATIVE_BUILD=true ;;
+        --do-binding-build) BUILD_BINDING=true ;;
         --ios) BUILD_PLATFORM="ios" ;;
         --an) BUILD_PLATFORM="android" ;;
         --help) show_usage; exit 0 ;;
@@ -86,12 +89,14 @@ else
   dotnet restore iOS.Binding/iOS.Binding.csproj
 fi
 
-echo "Building Binding solutions"
-if [ "$BUILD_PLATFORM" = "ios" ]; then
-  dotnet build iOS.Binding/iOS.Binding.csproj
-elif [ "$BUILD_PLATFORM" = "android" ]; then
-  dotnet build Android.Binding/Android.Binding.csproj
-else
-  dotnet build Android.Binding/Android.Binding.csproj
-  dotnet build iOS.Binding/iOS.Binding.csproj
+if [ "$BUILD_BINDING" = true ]; then
+  echo "Building Binding solutions"
+  if [ "$BUILD_PLATFORM" = "ios" ]; then
+    dotnet build iOS.Binding/iOS.Binding.csproj
+  elif [ "$BUILD_PLATFORM" = "android" ]; then
+    dotnet build Android.Binding/Android.Binding.csproj
+  else
+    dotnet build Android.Binding/Android.Binding.csproj
+    dotnet build iOS.Binding/iOS.Binding.csproj
+  fi
 fi

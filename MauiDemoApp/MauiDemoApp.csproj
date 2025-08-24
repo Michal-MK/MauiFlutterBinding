@@ -62,4 +62,12 @@
     <ItemGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">
         <ProjectReference Include="..\iOS.Binding\iOS.Binding.csproj"/>
     </ItemGroup>
+    <ItemGroup>
+      <Compile Update="Platforms\Android\FlutterPageHandler.cs">
+        <ExcludeFromCurrentConfiguration>false</ExcludeFromCurrentConfiguration>
+      </Compile>
+      <Compile Update="Platforms\iOS\FlutterPageHandler.cs">
+        <ExcludeFromCurrentConfiguration>true</ExcludeFromCurrentConfiguration>
+      </Compile>
+    </ItemGroup>
 </Project>

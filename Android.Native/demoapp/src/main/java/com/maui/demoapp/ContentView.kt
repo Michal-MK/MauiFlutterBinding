@@ -84,7 +84,7 @@ fun FlutterView() {
         modifier = Modifier.fillMaxSize(), // Occupy the max size in the Compose UI tree
         factory = {
             // Creates view
-            binding.getFlutterView(activity)
+            binding.getFlutterView(activity, "component_two")
         },
         update = { view ->
             // View's been inflated or state read in this block has been updated

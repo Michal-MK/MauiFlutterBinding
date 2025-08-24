@@ -14,13 +14,13 @@
 			Route="MainPage" />
 
 		<ShellContent
-			Title="Flutter App (Renderer)"
+			Title="Flutter Page (Renderer)"
 			ContentTemplate="{DataTemplate local:FlutterPage}"
 			Route="FlutterPage" />
 		
 		<ShellContent
-			Title="Flutter App (Handler)"
-			ContentTemplate="{DataTemplate local:FlutterHandlerPage}"
-			Route="FlutterPage2" />
+			Title="Page With Flutter Component"
+			ContentTemplate="{DataTemplate local:PageWithFlutterView}"
+			Route="FlutterComponentPage" />
 	</TabBar>
 </Shell>

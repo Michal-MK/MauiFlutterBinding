@@ -15,8 +15,6 @@ public partial class App : Application
         UIApplication.SharedApplication.SetStatusBarHidden(false, false);
 #endif
 
-        // MainPage = new AppShell();
-		var navigationPage = new NavigationPage(new MainPage());
-        MainPage = navigationPage;
+        MainPage = new AppShell();
 	}
 }

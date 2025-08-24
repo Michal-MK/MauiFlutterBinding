@@ -18,10 +18,11 @@ public static class MauiProgram
             .ConfigureMauiHandlers(handlers =>
             {
 #if IOS
-                handlers.AddCompatibilityRenderer(typeof(FlutterPage), typeof(FlutterPageRenderer));
                 handlers.AddHandler(typeof(FlutterView), typeof(FlutterViewHandler));
+                handlers.AddHandler(typeof(FlutterPage), typeof(FlutterPageHandler));
 #elif ANDROID
                 handlers.AddHandler(typeof(FlutterView), typeof(FlutterViewHandler));
+                handlers.AddHandler(typeof(FlutterPage), typeof(FlutterPageHandler));
 #endif
             });
 

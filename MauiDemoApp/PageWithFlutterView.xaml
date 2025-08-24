@@ -3,7 +3,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
 			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
 			 xmlns:local="clr-namespace:MauiDemoApp"
-			 x:Class="MauiDemoApp.FlutterHandlerPage"
+			 x:Class="MauiDemoApp.PageWithFlutterView"
 			 HandlerProperties.DisconnectPolicy="Manual"
 			 Title="FlutterPage">
 	<Grid RowDefinitions="Auto, *">
@@ -11,9 +11,10 @@
 			<VerticalStackLayout>
 				<Border BackgroundColor="Aqua" HeightRequest="400" />
 				<Grid Padding="32"
-					  HeightRequest="400"
 					  BackgroundColor="Brown">
-					<local:FlutterView />
+					<Grid BackgroundColor="White">
+						<local:FlutterView AndroidRenderMode="Texture" ViewType="{x:Static local:FlutterView.ComponentTwo}"/>
+					</Grid>
 				</Grid>
 				<Border BackgroundColor="Orange" HeightRequest="400" />
 				<Border BackgroundColor="Red" HeightRequest="400" />

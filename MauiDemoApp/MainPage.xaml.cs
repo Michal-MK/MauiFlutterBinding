@@ -40,6 +40,6 @@ public partial class MainPage : ContentPage
     }
 
     private void OnHandlerClicked(object? sender, EventArgs e) {
-        (App.Current.MainPage as NavigationPage)?.PushAsync(new FlutterHandlerPage(), animated: true);
+        (App.Current.MainPage as NavigationPage)?.PushAsync(new PageWithFlutterView(), animated: true);
     }
 }

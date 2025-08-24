@@ -1,0 +1,24 @@
+This is a Flutter embedding demo into MAUI apps,
+
+There are 3 Flutter views/components in flutter_app:
+1. Component One (main_component_one.dart)
+2. Component Two (main_component_two.dart)
+3. Main Page (main_page.dart)
+Files of interest are: size_reported.dart
+
+There is a native Android project (Android.Native) referencing the flutter project (flutter_app).
+Files of interest are: Binding.kt
+
+There is a .NET binding project (Android.Binding) referencing the native Android project.
+Files of interest are: Com.Maui.Binding.Binding.cs - generated file
+
+There is a MAUI project (MauiApp) referencing the .NET binding project.
+Files of interest are: FlutterViewHandler.cs, FlutterPageHandler.cs, FlutterPage.xaml, PageWithFlutterView.cs, FlutterView.cs
+
+To build use build_all.sh, pass --<platform> [an, ios] to build for the respective platform, pass -f to skip building the Flutter project (can save time).
+
+Ignore the iOS platform for now!
+
+The MAUI project is run separately, I will run it and provide you outputs from logcat!
+
+Minimal yapping. No summaries.
