@@ -65,12 +65,6 @@ This project demonstrates how to:
 ./build_all.sh -n           # Skip native builds
 ```
 
-### 2. Run MAUI Demo
-```bash
-# Open in IDE
-dotnet build MauiDemoApp/MauiDemoApp.csproj
-```
-
 ## 🔧 Step-by-Step Build Process
 
 ### 1. Flutter App
@@ -87,8 +81,8 @@ cd Android.Native
 This will:
 - Build the Android binding library
 - Generate AAR files
-- Copy dependencies to `xamarin` folder
-- Show dependency analysis
+- Copy dependencies to `xamarin` folder (yes old naming still)
+- Show some stats
 
 ### 3. iOS Native Binding  
 ```bash
@@ -98,11 +92,11 @@ cd iOS.Native
 This will:
 - Build iOS framework
 - Create XCFramework
-- Generate API definitions with Objective Sharpie
+- Generate API definitions with Objective Sharpie for MAUI
 - Copy frameworks to iOS.Binding
 
 ### 4. MAUI Application
-- all the iOS steps with provisioning need to be addressed as usual, tested on AN only
+- all the iOS steps with provisioning need to be addressed as usual
 ```bash
 dotnet build MauiFlutterBinding.sln --configuration Release
 ```
@@ -123,7 +117,7 @@ dotnet build MauiFlutterBinding.sln --configuration Release
 ### Flutter Configuration
 - **Version**: 3.32.8
 - **Build Mode**: Both debug and release built automatically
-- **Plugins**: device_info_plus 11.3.0
+- **Plugins**: device_info_plus 11.3.0 (just so that a plugin with native code is present)
 
 #### Flutter Build Modes
 The `./build.sh` script automatically builds **both debug and release** versions of Flutter:
