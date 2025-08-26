@@ -1,20 +1,11 @@
 package com.maui.binding
 
 import android.app.Activity
-import android.content.Context
-import android.content.ContextWrapper
-import android.content.Intent
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat.startActivity
-import androidx.core.view.doOnAttach
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentContainerView
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.ReportFragment.Companion.reportFragment
-import io.flutter.embedding.android.FlutterActivity
 import io.flutter.embedding.android.FlutterFragment
 import io.flutter.embedding.android.RenderMode
 import io.flutter.embedding.engine.FlutterEngine
@@ -26,12 +17,22 @@ import kotlinx.coroutines.launch
 
 class Size(val width: Float, val height: Float)
 
+interface SizeChangeCallback {
+    fun onSizeChanged(viewType: String, width: Float, height: Float)
+}
+
 class Binding {
     private var callback: StringCallback? = null
     private var flutterView: View? = null
+    private var flutterFragment: FlutterFragment? = null
+    private var sizeChangeCallback: SizeChangeCallback? = null
 
     private var sizeReportedMethodChannel: MethodChannel? = null
     private var lastReportedSize: MutableMap<String, Size> = mutableMapOf()
+
+    fun setSizeChangeCallback(callback: SizeChangeCallback?) {
+        this.sizeChangeCallback = callback
+    }
 
     fun async(activity: Activity, parameters: List<String>, callback: StringCallback) {
         this.callback = callback
@@ -41,7 +42,7 @@ class Binding {
         }
     }
 
-    fun getFlutterView(activity: Activity, type: String? = null): View {
+    fun getFlutterView(activity: Activity, type: String? = null, constraintWidth: Float = 0f, constraintHeight: Float = 0f): View {
         if (flutterView != null) {
             return flutterView as View
         }
@@ -49,12 +50,25 @@ class Binding {
             .apply { id = View.generateViewId() }
 
         val entrypoint = "main${if (type != null) "_$type" else ""}"
-        println("~LOG~ Creating Flutter fragment with entrypoint: $entrypoint")
+        println("~LOG~ Creating Flutter fragment with entrypoint: $entrypoint, constraints: ${constraintWidth}x${constraintHeight}")
 
+        val heightStr = if (constraintHeight == Float.POSITIVE_INFINITY) "Infinity" else constraintHeight.toString()
+        val dartArgs = listOf(
+            "width=$constraintWidth",
+            "height=$heightStr",
+            "viewType=${type ?: "main"}"
+        )
+        
+        println("~LOG~ Dart args: $dartArgs")
+        
         val flutterFragment = FlutterFragment.withNewEngine()
             .dartEntrypoint(entrypoint)
-            .renderMode(RenderMode.texture)
+            .dartEntrypointArgs(dartArgs)
+            .renderMode(RenderMode.surface)
             .build<FlutterFragment>()
+
+        // Store the fragment reference
+        this.flutterFragment = flutterFragment
 
         (activity as AppCompatActivity).supportFragmentManager.beginTransaction()
             .add(view.id, flutterFragment)
@@ -66,7 +80,7 @@ class Binding {
                 println("~LOG~ Flutter fragment onCreate called")
                 flutterFragment.flutterEngine?.let { engine ->
                     println("~LOG~ Flutter engine is available")
-                    // This is crucial - without this, plugins won't work
+
                     GeneratedPluginRegistrant.registerWith(engine)
                     println("~LOG~ Plugins registered")
 
@@ -80,6 +94,7 @@ class Binding {
         return view
     }
     
+    @Suppress("unused") // Called from the C# binding
     fun getLastReportedSize(viewType: String): Size? {
         return lastReportedSize[viewType]
     }
@@ -101,6 +116,10 @@ class Binding {
                     if (viewType != null) {
                         println("~LOG~ Received size from Flutter: $viewType - $size")
                         lastReportedSize[viewType] = size
+                        
+                        // Notify the callback
+                        sizeChangeCallback?.onSizeChanged(viewType, width ?: -1f, height ?: -1f)
+                        
                         result.success(null)
                     } else {
                         result.error("INVALID_ARGUMENT", "ViewType and Size are required", null)

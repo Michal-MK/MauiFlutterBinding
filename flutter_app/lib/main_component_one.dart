@@ -3,13 +3,19 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'package:flutter/material.dart';
 
-void main_component_one_impl() {
-  print("~LOG~ main_component_one_impl() called");
-  runApp(const MyComponentOne());
+void main_component_one_impl([double? constraintWidth, double? constraintHeight]) {
+  runApp(MyComponentOne(constraintWidth: constraintWidth, constraintHeight: constraintHeight));
 }
 
 class MyComponentOne extends StatelessWidget {
-  const MyComponentOne({super.key});
+  const MyComponentOne({
+    super.key,
+    this.constraintWidth,
+    this.constraintHeight,
+  });
+
+  final double? constraintWidth;
+  final double? constraintHeight;
 
   @override
   Widget build(BuildContext context) {
@@ -27,6 +33,8 @@ class MyComponentOne extends StatelessWidget {
           ],
           child: SizeReporter(
             viewType: "component_one",
+            constraintWidth: constraintWidth,
+            constraintHeight: constraintHeight,
             child: Container(
               height: 200,
               decoration: BoxDecoration(

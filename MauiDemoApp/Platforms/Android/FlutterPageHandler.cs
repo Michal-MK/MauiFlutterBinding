@@ -8,10 +8,15 @@ public class FlutterPageHandler(IPropertyMapper mapper, CommandMapper? commandMa
 
 	public static IPropertyMapper<FlutterPage, FlutterPageHandler> PropertyMapper = new PropertyMapper<FlutterPage, FlutterPageHandler>(ViewMapper);
 
-	public FlutterPageHandler() : this(PropertyMapper, null) { }
+	public FlutterPageHandler() : this(PropertyMapper) { }
 
 	protected override Android.Views.View CreatePlatformView() {
-		return new Binding().GetFlutterView(MainActivity.Instance, null);
+		return new Binding().GetFlutterView(
+			MainActivity.Instance,
+			null,
+			(float)(DeviceDisplay.MainDisplayInfo.Width / DeviceDisplay.MainDisplayInfo.Density),
+			(float)(DeviceDisplay.MainDisplayInfo.Height / DeviceDisplay.MainDisplayInfo.Density)
+		);
 	}
 
 	protected override void DisconnectHandler(Android.Views.View platformView) {

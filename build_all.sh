@@ -76,8 +76,12 @@ if [ "$SKIP_NATIVE_BUILD" = false ]; then
   fi
 fi
 
-echo "Deleting all bin/ and obj/"
-find . -type d \( -name bin -o -name obj \) -exec rm -rf {} +
+echo "Delete bin and obj in the binding project"
+if [ "$BUILD_PLATFORM" = "ios" ]; then
+  find iOS.Binding -type d \( -name bin -o -name obj \) -exec rm -rf {} +
+elif [ "$BUILD_PLATFORM" = "android" ]; then
+  find Android.Binding -type d \( -name bin -o -name obj \) -exec rm -rf {} +
+fi
 
 echo "Restoring Binding solutions"
 if [ "$BUILD_PLATFORM" = "ios" ]; then

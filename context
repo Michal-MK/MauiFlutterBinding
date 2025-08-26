@@ -4,7 +4,7 @@ There are 3 Flutter views/components in flutter_app:
 1. Component One (main_component_one.dart)
 2. Component Two (main_component_two.dart)
 3. Main Page (main_page.dart)
-Files of interest are: size_reported.dart
+Files of interest are: size_reporter.dart
 
 There is a native Android project (Android.Native) referencing the flutter project (flutter_app).
 Files of interest are: Binding.kt
@@ -12,13 +12,17 @@ Files of interest are: Binding.kt
 There is a .NET binding project (Android.Binding) referencing the native Android project.
 Files of interest are: Com.Maui.Binding.Binding.cs - generated file
 
-There is a MAUI project (MauiApp) referencing the .NET binding project.
+There is a MAUI project (MauiDemoApp) referencing the .NET binding project.
 Files of interest are: FlutterViewHandler.cs, FlutterPageHandler.cs, FlutterPage.xaml, PageWithFlutterView.cs, FlutterView.cs
 
-To build use build_all.sh, pass --<platform> [an, ios] to build for the respective platform, pass -f to skip building the Flutter project (can save time).
+To build use build_all.sh, pass --<platform> [an, ios] to build for the respective platform, pass -f to skip building the Flutter project (can save time if no changes to flutter files), pass -n to skip the native project build (when changes are not in flutter nor the native code) pass --do-binding-build to include the binding build step (but is often redundant as building the MAUI project always rebuilds the binding).
 
 Ignore the iOS platform for now!
 
-The MAUI project is run separately, I will run it and provide you outputs from logcat!
+Ignore intellisense errors from the Com.Maui.Binding.Binding.cs and other generated files, they are false positives in most cases, if the build fails I will let you know.
 
-Minimal yapping. No summaries.
+The MAUI project is run separately, I will run it and provide you outputs from logcat do not do anything with logcat yourself either!
+
+If you add logging into any part of the project, prefix it with "~LOG~ " for simple identification.
+
+Minimal yapping! No summaries! Do not state the obvious!

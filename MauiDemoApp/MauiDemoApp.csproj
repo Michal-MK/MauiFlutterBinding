@@ -1,7 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFrameworks>net9.0-android;net9.0-ios</TargetFrameworks>
+        <TargetFramework>net9.0-android</TargetFramework>
+<!--        <TargetFramework>net9.0-ios</TargetFramework>-->
         <Nullable>enable</Nullable>
         <OutputType>Exe</OutputType>
         <RootNamespace>MauiDemoApp</RootNamespace>
@@ -61,13 +62,5 @@
     </ItemGroup>
     <ItemGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">
         <ProjectReference Include="..\iOS.Binding\iOS.Binding.csproj"/>
-    </ItemGroup>
-    <ItemGroup>
-      <Compile Update="Platforms\Android\FlutterPageHandler.cs">
-        <ExcludeFromCurrentConfiguration>false</ExcludeFromCurrentConfiguration>
-      </Compile>
-      <Compile Update="Platforms\iOS\FlutterPageHandler.cs">
-        <ExcludeFromCurrentConfiguration>true</ExcludeFromCurrentConfiguration>
-      </Compile>
     </ItemGroup>
 </Project>

@@ -5,7 +5,7 @@
 			 xmlns:local="clr-namespace:MauiDemoApp"
 			 x:Class="MauiDemoApp.PageWithFlutterView"
 			 HandlerProperties.DisconnectPolicy="Manual"
-			 Title="FlutterPage">
+			 Title="MAUI Page &amp; FlutterView">
 	<Grid RowDefinitions="Auto, *">
 		<ScrollView Grid.Row="1">
 			<VerticalStackLayout>
@@ -13,7 +13,9 @@
 				<Grid Padding="32"
 					  BackgroundColor="Brown">
 					<Grid BackgroundColor="White">
-						<local:FlutterView AndroidRenderMode="Texture" ViewType="{x:Static local:FlutterView.ComponentTwo}"/>
+						<local:FlutterView AndroidRenderMode="Texture"
+										   ViewType="{x:Static local:FlutterView.ComponentTwo}"
+										   HeightExpectancy="300" />
 					</Grid>
 				</Grid>
 				<Border BackgroundColor="Orange" HeightRequest="400" />
