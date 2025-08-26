@@ -171,58 +171,8 @@ cd iOS.Native
 ```bash
 cd flutter_app
 flutter attach # When MAUI app is running with the flutter app built in debug mode
+# Or though VS Code
 ```
-
-## 📝 Key Features Implemented
-
-- ✅ **Flutter View Embedding**: Flutter app runs as native view
-- ✅ **Bidirectional Communication**: MAUI ↔ Flutter messaging
-- ✅ **Platform APIs**: Access to device info via Flutter plugins
-- ✅ **Release Build**: Optimized for production deployment
-- ✅ **Multi-Architecture**: ARM64, ARMv7, x86_64 support
-
-## 🔧 Troubleshooting
-
-### Common Issues
-
-**NDK Version Mismatch**
-```bash
-# Check NDK version
-ls $ANDROID_HOME/ndk/
-# Ensure 27.0+ is available
-```
-
-**Kotlin Version Issues**
-```bash
-# Update build.gradle
-kotlin_version = '2.1.0'
-```
-
-**iOS Simulator Issues**
-```bash
-# For iOS simulator testing, use debug build
-flutter build ios-framework --debug
-```
-
-**Missing Dependencies**
-```bash
-# Clean and rebuild
-./build_all.sh
-```
-
-## 📚 Resources
-
-- [Flutter Integration Guide](https://docs.flutter.dev/add-to-app)
-- [MAUI Documentation](https://docs.microsoft.com/en-us/dotnet/maui/)
-- [Xamarin Binding Documentation](https://docs.microsoft.com/en-us/xamarin/android/platform/binding-java-library/)
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Test the complete build process
-5. Submit a pull request
 
 ## 📄 License
 
