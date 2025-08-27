@@ -13,15 +13,24 @@
 				<Grid Padding="32"
 					  BackgroundColor="Brown">
 					<Grid BackgroundColor="White">
-						<local:FlutterView AndroidRenderMode="Texture"
+						<local:FlutterView x:Name="flutterView"
+										   AndroidRenderMode="Texture"
 										   ViewType="{x:Static local:FlutterView.ComponentTwo}"
-										   HeightExpectancy="300" />
+										   HeightExpectancy="600" />
 					</Grid>
 				</Grid>
-				<Border BackgroundColor="Orange" HeightRequest="400" />
+				<Border BackgroundColor="Orange" HeightRequest="400">
+					<VerticalStackLayout>
+						<Button Text="Decrease - 50"
+								Clicked="DecreaseSize"/>
+						
+						<Button Text="Increase + 50"
+								Clicked="IncreaseSize" />
+					</VerticalStackLayout>
+				</Border>
 				<Border BackgroundColor="Red" HeightRequest="400" />
 			</VerticalStackLayout>
-		</ScrollView>	
-		<Border BackgroundColor="White" HeightRequest="64" Grid.Row="0"/>
+		</ScrollView>
+		<Border BackgroundColor="White" HeightRequest="64" Grid.Row="0" />
 	</Grid>
 </ContentPage>

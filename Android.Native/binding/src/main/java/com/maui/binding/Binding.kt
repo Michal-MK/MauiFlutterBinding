@@ -64,7 +64,7 @@ class Binding {
         val flutterFragment = FlutterFragment.withNewEngine()
             .dartEntrypoint(entrypoint)
             .dartEntrypointArgs(dartArgs)
-            .renderMode(RenderMode.surface)
+            .renderMode(RenderMode.texture)
             .build<FlutterFragment>()
 
         // Store the fragment reference

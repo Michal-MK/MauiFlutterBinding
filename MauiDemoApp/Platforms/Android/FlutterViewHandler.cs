@@ -25,8 +25,6 @@ public class FlutterViewHandler(IPropertyMapper mapper, CommandMapper? commandMa
 		);
 		StartSizeMonitoring();
 
-		Task.Delay(5000).ContinueWith((d) => { MainThread.InvokeOnMainThreadAsync(() => { VirtualView.HeightRequest = 600; }); });
-
 		return flutterView;
 	}
 
@@ -42,7 +40,7 @@ public class FlutterViewHandler(IPropertyMapper mapper, CommandMapper? commandMa
 					lastSize = newSize;
 					Android.Util.Log.Info("~LOG~", $"FlutterViewHandler: Flutter reported new size {newSize.Width}x{newSize.Height}");
 
-					MainThread.BeginInvokeOnMainThread(() => { VirtualView.HeightRequest = newSize.Height; });
+					MainThread.BeginInvokeOnMainThread(() => { VirtualView.HeightRequest = newSize.Height + 50; });
 				}
 			}
 		});

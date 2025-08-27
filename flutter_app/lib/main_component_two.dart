@@ -26,6 +26,9 @@ class MyComponentTwo extends StatefulWidget {
 class _MyComponentTwoState extends State<MyComponentTwo> {
   final List<Widget> dynamicChildren = [];
 
+  double blueWidgetHeight = 50;
+  int sizeReportDelay = 2000;
+
   void addChild() {
     setState(() {
       dynamicChildren.add(
@@ -64,11 +67,12 @@ class _MyComponentTwoState extends State<MyComponentTwo> {
             viewType: "component_two",
             constraintWidth: widget.constraintWidth,
             constraintHeight: widget.constraintHeight,
+            sizeReportDelay: sizeReportDelay,
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
                 Container(
-                  height: 100,
+                  height: 20,
                   color: Colors.red,
                 ),
                 Text("Component Two", style: TextStyle(fontSize: 24, color: Colors.black)),
@@ -79,8 +83,31 @@ class _MyComponentTwoState extends State<MyComponentTwo> {
                     IconButton(onPressed: addChild, icon: Icon(Icons.add)),
                   ],
                 ),
+                Text("Blue widget height: ${blueWidgetHeight.toStringAsFixed(1)}"),
+                Slider(
+                  value: blueWidgetHeight,
+                  min: 50,
+                  max: 800,
+                  onChanged: (value) {
+                    setState(() {
+                      blueWidgetHeight = value;
+                    });
+                  },
+                ),
+                Text("Report delay: $sizeReportDelay"),
+                Slider(
+                  value: sizeReportDelay.toDouble(),
+                  min: 0,
+                  max: 2000,
+                  divisions: 2000 ~/ 20,
+                  onChanged: (value) {
+                    setState(() {
+                      sizeReportDelay = value.toInt();
+                    });
+                  },
+                ),
                 Container(
-                  height: 50,
+                  height: blueWidgetHeight,
                   color: Colors.blue,
                 ),
                 ...dynamicChildren,

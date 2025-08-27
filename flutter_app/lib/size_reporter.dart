@@ -5,6 +5,7 @@ class SizeReporter extends StatefulWidget {
   const SizeReporter({
     required this.viewType,
     required this.child,
+    this.sizeReportDelay,
     this.constraintWidth,
     this.constraintHeight,
     super.key,
@@ -12,6 +13,7 @@ class SizeReporter extends StatefulWidget {
 
   final String viewType;
   final Widget child;
+  final int? sizeReportDelay;
   final double? constraintWidth;
   final double? constraintHeight;
 
@@ -105,11 +107,21 @@ class _SizeReporterState extends State<SizeReporter> with WidgetsBindingObserver
 
       print("~LOG~ Reporting size for ${widget.viewType}: ${sizeToReport.width}x${sizeToReport.height}");
 
-      _channel.invokeMethod('reportSize', {
-        'viewType': widget.viewType,
-        'width': sizeToReport.width,
-        'height': sizeToReport.height,
-      });
+      if (widget.sizeReportDelay == 0) {
+        _channel.invokeMethod('reportSize', {
+          'viewType': widget.viewType,
+          'width': sizeToReport.width,
+          'height': sizeToReport.height,
+        });
+      } else {
+        Future.delayed(Duration(milliseconds: widget.sizeReportDelay ?? 2000), () {
+          _channel.invokeMethod('reportSize', {
+            'viewType': widget.viewType,
+            'width': sizeToReport.width,
+            'height': sizeToReport.height,
+          });
+        });
+      }
     }
   }
 
