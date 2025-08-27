@@ -150,7 +150,7 @@ fun FlutterView() {
                 .height(flutterContentHeight), // Use dynamic height from size reporter
             factory = {
                 // Creates view
-                binding.getFlutterView(activity, "component_two", 500f, 400f)
+                binding.getFlutterView(activity, "component_two", 500f, 600f)
             },
             update = { view ->
                 // View's been inflated or state read in this block has been updated
