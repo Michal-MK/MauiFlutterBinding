@@ -1,5 +1,6 @@
 import 'dart:isolate';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_app/size_reporter.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
@@ -84,7 +85,7 @@ class _MyComponentTwoState extends State<MyComponentTwo> {
                   ],
                 ),
                 Text("Blue widget height: ${blueWidgetHeight.toStringAsFixed(1)}"),
-                Slider(
+                CupertinoSlider(
                   value: blueWidgetHeight,
                   min: 50,
                   max: 800,
@@ -95,7 +96,7 @@ class _MyComponentTwoState extends State<MyComponentTwo> {
                   },
                 ),
                 Text("Report delay: $sizeReportDelay"),
-                Slider(
+                CupertinoSlider(
                   value: sizeReportDelay.toDouble(),
                   min: 0,
                   max: 2000,

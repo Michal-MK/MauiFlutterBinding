@@ -20,11 +20,11 @@ case $1 in
 esac
 
 echo "Check flutter"
-# flutter doctor
+fvm flutter doctor
 
 if [ "$PLATFORM" = "ios" ] || [ "$PLATFORM" = "all" ]; then
     echo "Build ios frameworks"
-    flutter build ios-framework --no-profile
+    fvm flutter build ios-framework --no-profile
     echo "Mixing debug build for simulator with release build"
     rm -R build/ios/framework/Release/App.xcframework/ios-arm64_x86_64-simulator
     cp -R build/ios/framework/Debug/App.xcframework/ios-arm64_x86_64-simulator build/ios/framework/Release/App.xcframework/ios-arm64_x86_64-simulator
@@ -32,5 +32,5 @@ fi
 
 if [ "$PLATFORM" = "android" ] || [ "$PLATFORM" = "all" ]; then
     echo "Build android aar"
-    flutter build aar --no-profile
+    fvm flutter build aar --no-profile
 fi
